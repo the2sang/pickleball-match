@@ -170,18 +170,18 @@
                 <tbody class="divide-y divide-slate-100">
                 {#each matches as match}
                     <tr class="hover:bg-slate-50/50 transition">
-                        <td class="py-2 px-4 text-center border-r border-slate-50">
+                        <td class="py-1 px-4 text-center border-r border-slate-50">
                             <span class="font-black text-xl {match.isPairingActive ? 'text-indigo-600' : 'text-slate-200'} italic">#{match.round}&ensp;</span>
                             {#if match.isPairingActive}<span class="block text-[8px] font-bold text-indigo-400 mt-1 uppercase">파트너 고정&ensp;</span>{/if}
                         </td>
-                        <td class="py-2 px-2 text-center">
+                        <td class="py-1 px-2 text-center">
                             <div class="flex justify-center items-center gap-x-3">
                                 <span class="text-lg font-extrabold text-indigo-600">{match.teamA[0]}</span>
                                 {#if match.teamA[1]}<span class="text-rose-400 text-sm">{match.isPairingActive ? '❤️' : ' * '}</span><span class="text-lg font-extrabold text-indigo-600">{match.teamA[1]}&ensp;</span>{/if}
                             </div>
                         </td>
-                        <td class="py-2 text-center text-[9px] font-black text-slate-200 tracking-tighter">Vs.&ensp;</td>
-                        <td class="py-2 px-2 text-center">
+                        <td class="py-1 text-center text-[9px] font-black text-slate-200 tracking-tighter">Vs.&ensp;</td>
+                        <td class="py-1 px-2 text-center">
                             <div class="flex justify-center items-center gap-x-3">
                                 <span class="text-lg font-extrabold text-emerald-600">{match.teamB[0]}&ensp;</span>
                                 {#if match.teamB[1]}<span class="text-rose-400 text-sm">{match.isPairingActive ? '❤️' : ' * '}</span><span class="text-lg font-extrabold text-emerald-600">&ensp;{match.teamB[1]}&ensp;</span>{/if}
