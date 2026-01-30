@@ -116,7 +116,7 @@
 
 <div class="max-w-4xl mx-auto p-4 md:p-10 bg-slate-50 min-h-screen text-slate-900 font-sans">
     <header class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 mb-8">
-        <h1 class="text-2xl font-black tracking-tighter text-slate-800 mb-6">🏓 PICKLEBALL STRATEGY</h1>
+        <h1 class="text-2xl font-black tracking-tighter text-slate-800 mb-6">🏓 피클볼 매칭 오더 생성하기</h1>
 
         <div class="grid md:grid-cols-2 gap-8">
             <div class="space-y-4">
@@ -156,9 +156,6 @@
     </header>
 
     {#if matches.length > 0}
-        <div class="flex justify-end gap-2 mb-4">
-            <button on:click={shareViaLink} class="px-4 py-2 bg-yellow-400 text-yellow-900 rounded-xl text-xs font-bold shadow-sm">💬 카톡 공유</button>
-        </div>
 
         <div bind:this={tableRef} class="bg-white rounded-[2rem] shadow-2xl border border-slate-200 overflow-hidden">
             <table class="w-full border-collapse">
@@ -174,20 +171,20 @@
                 {#each matches as match}
                     <tr class="hover:bg-slate-50/50 transition">
                         <td class="py-6 px-4 text-center border-r border-slate-50">
-                            <span class="font-black text-xl {match.isPairingActive ? 'text-indigo-600' : 'text-slate-200'} italic">#{match.round}</span>
-                            {#if match.isPairingActive}<span class="block text-[8px] font-bold text-indigo-400 mt-1 uppercase">Fixed</span>{/if}
+                            <span class="font-black text-xl {match.isPairingActive ? 'text-indigo-600' : 'text-slate-200'} italic">#{match.round}&ensp;</span>
+                            {#if match.isPairingActive}<span class="block text-[8px] font-bold text-indigo-400 mt-1 uppercase">Fixed&ensp;</span>{/if}
                         </td>
                         <td class="py-6 px-2 text-center">
                             <div class="flex justify-center items-center gap-x-3">
                                 <span class="text-lg font-extrabold text-indigo-600">{match.teamA[0]}</span>
-                                {#if match.teamA[1]}<span class="text-rose-400 text-sm">{match.isPairingActive ? '❤️' : '•'}</span><span class="text-lg font-extrabold text-indigo-600">{match.teamA[1]}</span>{/if}
+                                {#if match.teamA[1]}<span class="text-rose-400 text-sm">{match.isPairingActive ? '❤️' : ' * '}</span><span class="text-lg font-extrabold text-indigo-600">{match.teamA[1]}&ensp;</span>{/if}
                             </div>
                         </td>
-                        <td class="py-6 text-center text-[9px] font-black text-slate-200 tracking-tighter">VS</td>
+                        <td class="py-6 text-center text-[9px] font-black text-slate-200 tracking-tighter">Vs.&ensp;</td>
                         <td class="py-6 px-2 text-center">
                             <div class="flex justify-center items-center gap-x-3">
-                                <span class="text-lg font-extrabold text-emerald-600">{match.teamB[0]}</span>
-                                {#if match.teamB[1]}<span class="text-rose-400 text-sm">{match.isPairingActive ? '❤️' : '•'}</span><span class="text-lg font-extrabold text-emerald-600">{match.teamB[1]}</span>{/if}
+                                <span class="text-lg font-extrabold text-emerald-600">{match.teamB[0]}&ensp;</span>
+                                {#if match.teamB[1]}<span class="text-rose-400 text-sm">{match.isPairingActive ? '❤️' : ' * '}</span><span class="text-lg font-extrabold text-emerald-600">&ensp;{match.teamB[1]}&ensp;</span>{/if}
                             </div>
                         </td>
                     </tr>
