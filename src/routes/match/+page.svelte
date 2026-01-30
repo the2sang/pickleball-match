@@ -1,6 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { toPng } from 'html-to-image';
+    import {goto, replaceState} from '$app/navigation';
 
     let names = [];
     let fixedPairs = [];
@@ -27,7 +28,7 @@
     });
 
     const addName = () => {
-        if (newName && names.length < 12) {
+        if (newName && names.length < 16) {
             names = [...names, newName.trim()];
             newName = "";
         }
@@ -56,7 +57,7 @@
 
     const generateSchedule = () => {
         if (names.length < 4) return alert("최소 4명의 선수가 필요합니다.");
-        const matchDuration = 10;
+        const matchDuration = 15;
         const totalMatchesCount = Math.floor((hours * 60) / matchDuration);
         let tempMatches = [];
         let playCount = {};
@@ -129,6 +130,13 @@
             alert('이미지 저장에 실패했습니다.');
         }
     };
+
+
+    const reflesh = async () => {
+        matches.length = 0;
+        fixedPairs.length = 0;
+        names.length = 0;
+    }
 </script>
 
 <div class="max-w-4xl mx-auto p-4 md:p-10 bg-slate-50 min-h-screen text-slate-900 font-sans">
@@ -167,16 +175,21 @@
 
             <div class="flex flex-col justify-end gap-4">
                 <select bind:value={hours} class="w-full p-4 bg-slate-100 rounded-2xl font-bold outline-none cursor-pointer border-none">
-                    {#each [1,2,3,4,5] as h}<option value={h}>{h}시간 ({h * 6}경기)</option>{/each}
+                    {#each [1,2,3,4,5] as h}<option value={h}>{h}시간 ({h * 4}경기)</option>{/each}
                 </select>
                 <button on:click={generateSchedule} class="w-full bg-slate-900 text-white font-black py-4 rounded-2xl shadow-xl hover:bg-black transition">대진표 생성하기</button>
+                <strong>* 두 명의 선수 같은 팀으로 구성방법</strong>같은 팀으로 구성하고자 하는 선수 클릭 후 파트너로 묶기 클릭한 후 같은 팀으로 시작할 라운드 조정합니다.
+                <button on:click={reflesh} class="w-full bg-slate-900 text-white font-black py-4 rounded-2xl shadow-xl hover:bg-black transition">초기화 하기</button>
+
             </div>
         </div>
     </header>
 
     {#if matches.length > 0}
         <div class="flex justify-end gap-3 mb-6 px-2">
-            <button on:click={saveAsImage} class="px-5 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold shadow-sm hover:shadow-md transition">🖼️ 이미지 저장</button>
+            <p>생성된 대진표를 이미지로 저장가능</p>
+            <button on:click={saveAsImage} class="px-5 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold shadow-sm hover:shadow-md transition">🖼️ 이미지로 저장</button>
+
         </div>
 
 
