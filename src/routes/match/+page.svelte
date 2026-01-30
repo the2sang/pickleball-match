@@ -1,5 +1,6 @@
 <script>
     import { onMount } from 'svelte';
+    import { toPng } from 'html-to-image';
 
     let names = [];
     let fixedPairs = [];
@@ -106,17 +107,35 @@
         matches = tempMatches;
     };
 
-    const shareViaLink = async () => {
-        const data = btoa(JSON.stringify({ names, fixedPairs, matches, pairStartRound }));
-        const url = `${window.location.origin}${window.location.pathname}?share=${data}`;
-        if (navigator.share) await navigator.share({ title: '피클볼 대진표', url });
-        else { await navigator.clipboard.writeText(url); alert("링크 복사 완료!"); }
+    // 이미지 저장 함수
+    const saveAsImage = async () => {
+        if (!tableRef) return;
+
+        try {
+            // 1. HTML 요소를 PNG 데이터(base64)로 변환
+            const dataUrl = await toPng(tableRef, {
+                backgroundColor: '#ffffff', // 배경색을 흰색으로 고정 (투명 방지)
+                padding: 40,               // 이미지 테두리 여백
+                quality: 1,                // 화질 (0~1)
+            });
+
+            // 2. 가상의 링크를 만들어 다운로드 실행
+            const link = document.createElement('a');
+            link.download = `pickleball-match-${new Date().toLocaleDateString()}.png`;
+            link.href = dataUrl;
+            link.click();
+        } catch (err) {
+            console.error('이미지 저장 중 오류 발생:', err);
+            alert('이미지 저장에 실패했습니다.');
+        }
     };
 </script>
 
 <div class="max-w-4xl mx-auto p-4 md:p-10 bg-slate-50 min-h-screen text-slate-900 font-sans">
     <header class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 mb-8">
         <h1 class="text-2xl font-black tracking-tighter text-slate-800 mb-6">🏓 피클볼 매칭 오더 생성하기</h1>
+
+
 
         <div class="grid md:grid-cols-2 gap-8">
             <div class="space-y-4">
@@ -156,6 +175,10 @@
     </header>
 
     {#if matches.length > 0}
+        <div class="flex justify-end gap-3 mb-6 px-2">
+            <button on:click={saveAsImage} class="px-5 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold shadow-sm hover:shadow-md transition">🖼️ 이미지 저장</button>
+        </div>
+
 
         <div bind:this={tableRef} class="bg-white rounded-[2rem] shadow-2xl border border-slate-200 overflow-hidden">
             <table class="w-full border-collapse">
