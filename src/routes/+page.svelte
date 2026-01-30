@@ -1,2 +1,4 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+
+<h1>Welcome to Pickleball Game Match</h1>
+<h3>매칭 오더 만들기</h3>
+<a href="/match">매칭이동</a>
