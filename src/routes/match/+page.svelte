@@ -1,7 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { toPng } from 'html-to-image';
-    import {goto, replaceState} from '$app/navigation';
+    import logo from '$lib/assets/YouTube.jpg';
 
     let names = [];
     let fixedPairs = [];
@@ -12,6 +12,8 @@
     let selectedForPair = [];
     let editingIndex = null;
     let tableRef;
+
+    export let href = "https://www.youtube.com/channel/UCCdv1_dkA6DDbrFInCTjSFA";
 
     onMount(() => {
         const params = new URLSearchParams(window.location.search);
@@ -106,6 +108,11 @@
             tempMatches.push({ round: i, teamA, teamB, isPairingActive });
         }
         matches = tempMatches;
+
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
     };
 
     // 이미지 저장 함수
@@ -180,9 +187,16 @@
                 <button on:click={generateSchedule} class="w-full bg-slate-900 text-white font-black py-4 rounded-2xl shadow-xl hover:bg-black transition">대진표 생성하기</button>
                 <strong>* 두 명의 선수 같은 팀으로 구성방법</strong>같은 팀으로 구성하고자 하는 선수 클릭 후 파트너로 묶기 클릭한 후 같은 팀으로 시작할 라운드 조정합니다.
                 <button on:click={reflesh} class="w-full bg-slate-900 text-white font-black py-4 rounded-2xl shadow-xl hover:bg-black transition">초기화 하기</button>
-
             </div>
+
         </div>
+        <div class="flex justify-center gap-3 mt-6 mb-6 px-2">
+            <a {href} target="_blank" rel="noreferrer"><strong>유투브 피클볼 영상은 여기로..(러닝철)</strong></a>
+            <a {href} target="_blank" rel="noreferrer">
+                <img src={logo} alt="러닝철" with="200" />
+            </a>
+        </div>
+
     </header>
 
     {#if matches.length > 0}
@@ -191,8 +205,6 @@
             <button on:click={saveAsImage} class="px-5 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold shadow-sm hover:shadow-md transition">🖼️ 이미지로 저장</button>
 
         </div>
-
-
         <div bind:this={tableRef} class="bg-white rounded-[2rem] shadow-2xl border border-slate-200 overflow-hidden">
             <table class="w-full border-collapse">
                 <thead class="bg-slate-900 text-white text-[9px] font-black uppercase tracking-[0.2em]">
@@ -228,5 +240,7 @@
                 </tbody>
             </table>
         </div>
+
+
     {/if}
 </div>
