@@ -199,7 +199,7 @@
             </a>
         </div>
         <div class="flex justify-center gap-3 mt-6 mb-6 px-2">
-            <a {href} target="_blank" rel="noreferrer"><strong>전국 피클볼 운동 정보 바로가기</strong></a>
+            <a href={pickleballLink} target="_blank" rel="noreferrer"><strong>전국 피클볼 운동 정보 바로가기</strong></a>
             <a href={pickleballLink} target="_blank" rel="noreferrer">
                 <img src={pickleballImage} alt="러닝철" with="200" />
             </a>
