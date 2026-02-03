@@ -209,8 +209,8 @@
 
     {#if matches.length > 0}
         <div class="flex justify-end gap-3 mb-6 px-2">
-            <p>생성된 대진표를 이미지로 저장가능</p>
-            <button on:click={saveAsImage} class="px-5 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold shadow-sm hover:shadow-md transition">🖼️ 이미지로 저장</button>
+            <p>생성된 대진표를 이미지로 저장</p>
+            <button on:click={saveAsImage} class="px-5 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold shadow-sm hover:shadow-md transition">🖼️이미지 저장</button>
 
         </div>
         <div bind:this={tableRef} class="bg-white rounded-[2rem] shadow-2xl border border-slate-200 overflow-hidden">
