@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import { toPng } from 'html-to-image';
     import logo from '$lib/assets/YouTube.jpg';
+    import pickleballImage from '$lib/assets/pickleball_info.jpg';
 
     let names = [];
     let fixedPairs = [];
@@ -14,6 +15,7 @@
     let tableRef;
 
     export let href = "https://www.youtube.com/channel/UCCdv1_dkA6DDbrFInCTjSFA";
+    export let pickleballLink = "https://m.blog.naver.com/kabang17/223352017875";
 
     onMount(() => {
         const params = new URLSearchParams(window.location.search);
@@ -194,6 +196,12 @@
             <a {href} target="_blank" rel="noreferrer"><strong>유투브 피클볼 영상은 여기로..(러닝철)</strong></a>
             <a {href} target="_blank" rel="noreferrer">
                 <img src={logo} alt="러닝철" with="200" />
+            </a>
+        </div>
+        <div class="flex justify-center gap-3 mt-6 mb-6 px-2">
+            <a {href} target="_blank" rel="noreferrer"><strong>전국 피클볼 운동 정보 바로가기</strong></a>
+            <a href={pickleballLink} target="_blank" rel="noreferrer">
+                <img src={pickleballImage} alt="러닝철" with="200" />
             </a>
         </div>
 
